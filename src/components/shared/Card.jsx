@@ -1,9 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RiAddCircleLine, RiCheckboxCircleLine } from "react-icons/ri";
+import { setShowDetail } from "../../features/showDetail/showDetailSlice";
+import {setProductToShow} from "../../features/productToshow/productToShow"
 import { addTask } from "../../features/cart/cartSlice"; // Verifica que esté correctamente importado
 
 function Card(props) {
-    const { toggleShowDetail, data } = props;
+    const { data } = props;
 
     /* redux */
     const cartProducts = useSelector((state) => state.carts); // Si "carts" es el nombre de tu slice
@@ -12,6 +14,11 @@ function Card(props) {
     const handleCartProduct = (product) => {
         dispatch(addTask(product)); // Añadir el producto al carrito mediante Redux
     };
+
+    const handleCloseDetail = (data) => {
+        dispatch(setShowDetail())
+        dispatch(setProductToShow(data))
+    }
 
     const renderIcon = (id) => {
         // Cambiar de 'filter' a 'find' para buscar un producto específico
@@ -42,7 +49,7 @@ function Card(props) {
         <>
             {/* card */}
             <div
-                onClick={toggleShowDetail}
+                onClick={() => handleCloseDetail(data)}
                 className="bg-[#1f1d2b] flex flex-col relative w-full rounded-xl pb-2 cursor-pointer"
             >
                 <figure className="w-full h-72">

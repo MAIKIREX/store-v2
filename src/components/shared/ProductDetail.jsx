@@ -1,22 +1,18 @@
 import { RiCloseFill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { setShowDetail } from "../../features/showDetail/showDetailSlice";
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 
 function ProductDetail(props) {
     // Selecciona solo la parte del estado que necesitas
     const showDetail = useSelector(state => state.showDetail);
+    const productToShow = useSelector(state => state.productToShow)
     const dispatch = useDispatch();
 
-    // Memoriza la función para evitar recrearla en cada renderizado
-    const handleCloseDetail = useCallback(() => {
-        dispatch(setShowDetail(!showDetail)); // Alterna entre true y false
-    }, [dispatch, showDetail]);
-
-    // Usar useEffect para ver el valor actualizado de showDetail
-    useEffect(() => {
-        console.log("showDetail ha cambiado:", showDetail);
-    }, [showDetail]);
+    //
+    const handleCloseDetail = () => {
+        dispatch(setShowDetail())
+    }
 
     return (
         <>
@@ -30,12 +26,12 @@ function ProductDetail(props) {
                     <h1 className="font-bold text-2xl text-center mb-6">Product Detail</h1>
                 </header>
                 <main>
-                    <figure className="mb-4">
-                        <img className="w-full h-full rounded-xl" src="headphone.jpg" alt="" />
+                    <figure className="mb-4 w-full h-72">
+                        <img className="w-full h-full rounded-xl" src={productToShow.product.image} alt="" />
                     </figure>
-                    <h2 className="font-medium text-xl mb-2">Title</h2>
-                    <p className="text-lg mb-2">price: 3.65</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea quos illo fugiat, a sed veritatis earum culpa aliquid nam dignissimos natus quo, libero dolor obcaecati est provident error minima adipisci!</p>
+                    <h2 className="font-medium text-xl mb-2">{productToShow.product.title}</h2>
+                    <p className="text-lg mb-2">price: {productToShow.product.price}</p>
+                    <p>{productToShow.product.description}</p>
                 </main>
             </div>
         </>
