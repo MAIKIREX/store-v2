@@ -1,6 +1,6 @@
 import OrdersCard from "../../components/shared/OrdersCard"; // Usa mayúsculas
 
-import { useSelector } from "react-redux";
+import { useSelector, } from "react-redux";
 
 function MyOrders() {
     const orders = useSelector((state) => state.orders);

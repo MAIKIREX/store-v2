@@ -8,6 +8,7 @@ import SignIn from "../SignIn/SignIn";
 import NotFound from "../NotFound/NotFound";
 import { useState } from "react";
 import Tavbar from "../../components/shared/Tavbar";
+import Checkout from "../../components/shared/Checkout"
 
 {
     /* Routes */
@@ -46,6 +47,7 @@ const App = () => {
                     <AppRoutes />
                     <Navbar />
                     <Tavbar toggleShowCheckout={toggleShowCheckout} />
+                    <Checkout/>
                 </div>
             </BrowserRouter>
         </>

@@ -2,25 +2,43 @@ import Card from "../../components/shared/Card";
 import { useState, useEffect } from "react";
 import ProductDetail from "../../components/shared/ProductDetail";
 import { RiSearch2Line} from "react-icons/ri";
-import Checkout from "../../components/shared/Checkout"
+import { useDispatch, useSelector } from "react-redux";
+import { setOpenCheckout, setCloseCheckout } from "../../features/checkoutToShow/checkoutToShowSlice";
 
 function Home() {
     {
         /* state */
     }
-    const [showCheckout, setShowCheckout] = useState(false);
     const [showDetail, setShowDetail] = useState(false);
+    const dispatch = useDispatch();
     /* guardado de la base de datos */
     const [item,setItem] = useState([])
     {
         /* Funtions */
     }
-    const toggleShowCheckout = () => {
-        setShowCheckout(!showCheckout);
-    };
     const toggleShowDetail = () => {
         setShowDetail(!showDetail);
     };
+    {/* showCheckoout */}
+    useEffect(() => {
+        const handleResize = () => {
+          const isSmall = window.innerWidth > 768; // Cambia el valor 768 al tamaño que prefieras
+          if(isSmall){
+            dispatch(setOpenCheckout());
+          }else{
+            dispatch(setCloseCheckout())
+          }
+        };
+    
+        // Llamar la función cuando el componente se monta
+        handleResize();
+    
+        // Escuchar cambios en el tamaño de la ventana
+        window.addEventListener('resize', handleResize);
+    
+        // Limpiar el evento cuando el componente se desmonta
+        return () => window.removeEventListener('resize', handleResize);
+      }, [dispatch]);
 
     // Fetching data from API
     useEffect(() => {
@@ -113,7 +131,6 @@ function Home() {
                         )}
                     </div>
                 </div>
-                <Checkout showCheckout={showCheckout} toggleShowCheckout={toggleShowCheckout}></Checkout>
             </div>
         </>
     );

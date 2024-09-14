@@ -2,12 +2,13 @@ import { RiCloseFill } from "react-icons/ri";
 import CardOrderItem from "./CardOrderItem"
 import {useState, useEffect} from "react"
 import { useDispatch, useSelector } from "react-redux";
+import { setShowCheckout } from "../../features/checkoutToShow/checkoutToShowSlice";
 import {addOrder} from "../../features/order/orderSlice"
 import {totalPrice} from "../../utils/totalPrice"
 import {Link} from "react-router-dom"
 
 function Checkout(props) {
-    const {showCheckout,toggleShowCheckout}=props
+
     const [showButtons,setShowButtons]=useState(false)
     //para mostrar los botones del CardOrder 
     useEffect(()=>{
@@ -16,6 +17,7 @@ function Checkout(props) {
     // Redux
     const cartProducts = useSelector(state => state.carts) 
     const Dispatch = useDispatch()
+    const showCheckout = useSelector(state => state.showCheckout)
     //console.log('cartProducts',cartProducts)
 
     //creacion del objeto que se guardara en un variable order de los pedidos
@@ -27,7 +29,7 @@ function Checkout(props) {
             totalPrice: totalPrice(cartProducts)
         }
         Dispatch(addOrder(OrderToAdd))
-        
+        Dispatch(setShowCheckout())
     }
     
     return (
@@ -35,12 +37,12 @@ function Checkout(props) {
             {/* cheackout */}
             <div
                 className={`text-white ${
-                    showCheckout ? "right-0" : "-right-full"
+                    showCheckout ? "right-0 top-0" : "-right-full hidden"
                 } fixed bg-[#1f1d2b] w-full lg:w-[23%] lg:right-0 h-full p-4 flex flex-col rounded-tl-xl rounded-bl-xl z-10 transition-all`}
             >
                 <header>
                     <button
-                        onClick={toggleShowCheckout}
+                        onClick={() => Dispatch(setShowCheckout())}
                         className="bg-[#262837] p-2 rounded-full lg:hidden mb-2"
                     >
                         <RiCloseFill />
@@ -60,7 +62,7 @@ function Checkout(props) {
                     
                 </div>
                 {/* Tavbar total */}
-                <div className="bg-[#262837] rounded-xl mt-4">
+                <div className="bg-[#262837] rounded-xl mt-4 mb-14 lg:mb-0">
                     <div className="flex justify-between px-4 py-6">
                         <p className="text-lg">Total:</p>
                         <p className="font-bold text-xl">{totalPrice(cartProducts)}</p>
