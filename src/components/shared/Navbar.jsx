@@ -19,6 +19,11 @@ function Navbar() {
                             <RiHandbagLine className="text-3xl"/>
                         </Link>
                     </li>
+                    <li className="hover:bg-[#262837] p-3 rounded-tl-xl rounded-bl-xl group">
+                        <Link to="/my-account" className="group-hover:bg-[#ec7c6a] group-hover:text-[white] flex justify-center p-4 rounded-xl text-[#ec7c6a]">
+                            <RiHandbagLine className="text-3xl"/>
+                        </Link>
+                    </li>
                 </ul>
             </div>
             <div>

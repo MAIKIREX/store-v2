@@ -23,7 +23,7 @@ function MyAccount() {
       <div className="min-h-screen flex items-center justify-center p-8">
         <div className="w-full max-w-4xl bg-[#1f1d2b] rounded-lg shadow-lg p-6">
           <h2 className="text-3xl font-bold text-gray-300 lg:mb-6 mb-2">My Account</h2>
-          <div className="text-start text-gray-400 mb-2">
+          <div className="text-start text-gray-400 mb-2 lg:hidden">
             <p className="text-xl">Name: <span>Antonio Villegas</span></p>
             <p className="text-xl">Email: <span>fadsfasd@dfasf.com</span> </p>
           </div>
@@ -92,6 +92,11 @@ function MyAccount() {
                 Update Password
               </button>
             </form>
+          </div>
+          {/* Delete account */}
+          <div className="fix fix-col mt-2 justify-center items-center">
+            <h2 className="text-gray-400 text-start text-2xl">Delete Accouint</h2>
+            <button className="bg-red-500 w-full py-2 text-gray-200 text-lg font-medium rounded-lg my-2 hover:bg-red-400">Delete</button>
           </div>
         </div>
       </div>
