@@ -2,7 +2,7 @@ import { RiCloseFill } from "react-icons/ri";
 import CardOrderItem from "./CardOrderItem"
 import {useState, useEffect} from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { setShowCheckout } from "../../features/checkoutToShow/checkoutToShowSlice";
+import { setShowCheckout, setCloseCheckout } from "../../features/checkoutToShow/checkoutToShowSlice";
 import {addOrder} from "../../features/order/orderSlice"
 import {totalPrice} from "../../utils/totalPrice"
 import {Link} from "react-router-dom"
@@ -29,7 +29,7 @@ function Checkout(props) {
             totalPrice: totalPrice(cartProducts)
         }
         Dispatch(addOrder(OrderToAdd))
-        Dispatch(setShowCheckout())
+        Dispatch(setCloseCheckout())
     }
     
     return (
